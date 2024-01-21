@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài 01</title>
+    <style>
+      #output {
+        font-family: "Times New Roman", Times, serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Nhập vào hai số a và b (a < b):</h1>
+    <form id="primeForm">
+      <label for="inputA">a:</label>
+      <input type="text" id="inputA" placeholder="Hãy nhập số" />
+      <br />
+      <label for="inputB">b:</label>
+      <input type="text" id="inputB" placeholder="Hãy nhập số" />
+      <br />
+      <button type="button" onclick="findAndSumPrimes()">
+        Tính tổng số nguyên tố
+      </button>
+    </form>
+
+    <p id="result">Các số nguyên tố trong khoảng từ a đến b:</p>
+    <p id="sumPrime">Tổng các số nguyên trong khoảng là:</p>
+
+    <script>
+      function Prime(n) {
+        if (n < 2) return false;
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i === 0) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      function findAndSumPrimes() {
+        const Anumb = parseInt(document.getElementById("inputA").value);
+        const Bnumb = parseInt(document.getElementById("inputB").value);
+
+        if (isNaN(Anumb) || isNaN(Bnumb)) {
+          alert("Hãy nhập số cho hợp lệ!");
+          return;
+        }
+
+        let primeNumbers = [];
+        let sumOfPrimes = 0;
+
+        for (let i = Anumb; i <= Bnumb; i++) {
+          if (Prime(i)) {
+            primeNumbers.push(i);
+            sumOfPrimes += i;
+          }
+        }
+
+        document.getElementById("result").textContent =
+          "Các số nguyên tố trong khoảng từ " +
+          Anumb +
+          " và " +
+          Bnumb +
+          ": " +
+          primeNumbers.join(", ");
+        document.getElementById("sumPrime").textContent =
+          "Tổng các số nguyên tố trong khoảng: " + sumOfPrimes;
+      }
+    </script>
+  </body>
+</html>
